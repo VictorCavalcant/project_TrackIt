@@ -2,6 +2,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom"
 import SignInPage from "./pages/SignInPage";
 import "./assets/reset.css"
 import SignUpPage from "./pages/SignUpPage";
+import HobbiesPage from "./pages/HobbiesPage";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SignInPage />}/>
         <Route path="/cadastro" element={<SignUpPage />}/>
+        <Route path="/habitos" element={<HobbiesPage />}/>
       </Routes>
     </BrowserRouter>
   );
