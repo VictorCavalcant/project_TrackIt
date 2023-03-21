@@ -17,15 +17,6 @@ const HobbiesPage = () => {
 					<p>+</p>
 				</button>
 			</MyHobbies>
-			<Hobbie>
-				<h1 className="title">Ler One Piece</h1>
-				<ul className="days">
-						{days.map((day,index) => {
-							return <li key={index} className="day">{day}</li>
-						})}
-					</ul>
-				<img className="delete" src={Trash} alt="trash"/>
-			</Hobbie>
 			<p className="empty">Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
 			<Menu></Menu>
 		</Main>

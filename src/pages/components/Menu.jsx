@@ -36,7 +36,7 @@ const Main = styled.div`
 	height: 70px;
 	background: #FFFFFF;
 
-	h2 {
+	h2 {	
 	font-family: 'Lexend Deca';
 	font-style: normal;
 	font-weight: 400;

@@ -3,6 +3,8 @@ import SignInPage from "./pages/SignInPage";
 import "./assets/reset.css"
 import SignUpPage from "./pages/SignUpPage";
 import HobbiesPage from "./pages/HobbiesPage";
+import HistoryPage from "./pages/HistoryPage";
+import TodayPage from "./pages/TodayPage";
 
 function App() {
   return (
@@ -11,7 +13,9 @@ function App() {
         <Route path="/" element={<SignInPage />}/>
         <Route path="/cadastro" element={<SignUpPage />}/>
         <Route path="/habitos" element={<HobbiesPage />}/>
-      </Routes>
+        <Route path="/historico" element={<HistoryPage />}/>
+        <Route path="/hoje" element={<TodayPage />}/>
+      </Routes> 
     </BrowserRouter>
   );
 }
