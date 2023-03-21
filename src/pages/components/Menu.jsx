@@ -49,7 +49,7 @@ const Main = styled.div`
 	.circle {
 		width: 91px;
 		height: 91px;
-		margin-bottom: 20px;
+		margin-bottom: 26px;
 		font-family: 'Lexend Deca';
 		font-style: normal;
 		font-weight: 400;
