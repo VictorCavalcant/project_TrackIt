@@ -3,8 +3,9 @@ import Logo from "../../assets/images/TrackIt_Logo.svg"
 import SignButton from "../components/SignButton.jsx"
 import { Link } from "react-router-dom"
 import axios from "axios";
-import { useState, useContext} from "react";
-import UserImgContext from "../../contexts/UserImgContext";
+import { useState} from "react";
+import { useNavigate } from "react-router-dom";
+import { ThreeDots } from  'react-loader-spinner'
 
 const SignUpPage = () => {
 
@@ -12,16 +13,68 @@ const SignUpPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [image_url, setImage_Url] = useState("");
+	const [loading, setLoading] = useState(false);
+
+	const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
+
+	const navigate = useNavigate();
+
+	function clearData() {
+		setName("");
+		setPassword("");
+		setEmail("");
+		setImage_Url("");
+		setLoading(false);
+	}
+
+	function SubmitData(e) {
+		e.preventDefault();
+		setLoading(true);
+		const promise = axios.post(URL, {
+			email,
+			name,
+			image: image_url,
+			password
+		});
+
+
+		promise.then(response => {
+			const {data} = response;
+			console.log(data);
+			navigate("/");
+			clearData();
+		});
+	
+		promise.catch(err => {
+			console.log(err.response)
+			alert("Erro, houve alguma falha no envio de dados");
+			setLoading(false);
+		}
+			);
+	}
 
 	return(
 		<Main>
 			<img src={Logo} alt=""/>
 			<Entry>
-				<input type="email" placeholder="email"></input>
-				<input type="password" placeholder="senha"></input>
-				<input type="text" placeholder="nome"></input>
-				<input type="text" placeholder="foto"></input>
-				<SignButton>Cadastrar</SignButton>
+				<form onSubmit={!loading ? SubmitData : ""}>
+					<input disabled={loading ? true : false} type="email" placeholder="email" required value={email} onChange={e => setEmail(e.target.value)}></input>
+					<input disabled={loading ? true : false} type="password" placeholder="senha" required value={password} onChange={e => setPassword(e.target.value)}></input>
+					<input disabled={loading ? true : false} type="text" placeholder="nome" value={name} required onChange={e => setName(e.target.value)}></input>
+					<input disabled={loading ? true : false} type="text" placeholder="foto" value={image_url} required onChange={e => setImage_Url(e.target.value)}></input>
+					<SignButton loading={loading}>{ loading ?
+						<ThreeDots 
+							height="80" 
+							width="80" 
+							radius="9"
+							color="white" 
+							ariaLabel="three-dots-loading"
+							wrapperStyle={{}}
+							wrapperClassName=""
+							visible={true}
+						/> : "Cadastrar"}
+					</SignButton>
+				</form>
 			</Entry>
 			<Link to="/"><p className="info">Já tem uma conta? Faça login!</p></Link>
 		</Main>
@@ -78,9 +131,16 @@ const Entry = styled.div`
 		font-weight: 400;
 		font-size: 20px;
 		line-height: 25px;
-		color: #DBDBDB;
+		color: #c6c4c4;
 		padding-left: 4px;
 		}
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 `
 

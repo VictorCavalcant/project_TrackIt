@@ -67,7 +67,7 @@ const Entry = styled.div`
 		font-weight: 400;
 		font-size: 20px;
 		line-height: 25px;
-		color: #DBDBDB;
+		color: #c6c4c4;
 		padding-left: 4px;
 		}
 	}
