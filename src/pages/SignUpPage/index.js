@@ -2,8 +2,17 @@ import styled from "styled-components"
 import Logo from "../../assets/images/TrackIt_Logo.svg"
 import SignButton from "../components/SignButton.jsx"
 import { Link } from "react-router-dom"
+import axios from "axios";
+import { useState, useContext} from "react";
+import UserImgContext from "../../contexts/UserImgContext";
 
 const SignUpPage = () => {
+
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [image_url, setImage_Url] = useState("");
+
 	return(
 		<Main>
 			<img src={Logo} alt=""/>

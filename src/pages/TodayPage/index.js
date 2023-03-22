@@ -2,8 +2,6 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import Menu from "../components/Menu";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
 import 'dayjs/locale/pt-br'
 import CheckMark from "../../assets/images/Checkmark.svg"
 
@@ -11,19 +9,9 @@ const TodayPage = () => {
 
 	dayjs.locale('pt-br');
 
-	const today = dayjs();
 	const data_weekday = dayjs().format("dddd")
-
 	const weekday = data_weekday.charAt(0).toUpperCase() + data_weekday.slice(1);
-
-
 	const day_month = dayjs().format("D/M")
-
-
-	console.log(today);
-	console.log(weekday);
-	console.log(day_month);
-
 
 	return (
 		<Main>
