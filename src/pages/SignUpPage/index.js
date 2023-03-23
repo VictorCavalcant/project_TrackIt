@@ -3,9 +3,10 @@ import Logo from "../../assets/images/TrackIt_Logo.svg"
 import SignButton from "../components/SignButton.jsx"
 import { Link } from "react-router-dom"
 import axios from "axios";
-import { useState} from "react";
+import { useState, useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import { ThreeDots } from  'react-loader-spinner'
+import LoadingContext from "../../contexts/LoadingContext";
 
 const SignUpPage = () => {
 
@@ -13,7 +14,7 @@ const SignUpPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [image_url, setImage_Url] = useState("");
-	const [loading, setLoading] = useState(false);
+	const {loading, setLoading} = useContext(LoadingContext);
 
 	const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
 

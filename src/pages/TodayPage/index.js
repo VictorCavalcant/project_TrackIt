@@ -4,6 +4,9 @@ import Menu from "../components/Menu";
 import dayjs from "dayjs";
 import 'dayjs/locale/pt-br'
 import CheckMark from "../../assets/images/Checkmark.svg"
+import { useState, useContext} from "react";
+import TokenContext from "../../contexts/TokenContext";
+
 
 const TodayPage = () => {
 
@@ -24,7 +27,7 @@ const TodayPage = () => {
 					<p className="sequence">Sequência atual: 2 dias</p>
 					<p className="sequence">Seu recorde: 4 dias</p>
 				</div>
-				<div className="checkbox">
+				<div className="checkbox_unselected">
 					<img src={CheckMark} alt="checkmark"/>
 				</div>
 			</Hobbie>
@@ -97,7 +100,7 @@ const Hobbie = styled.div`
 	color: #666666;
 	}
 
-	.checkbox {
+	.checkbox_unselected {
 		box-sizing: border-box;
 		position: absolute;
 		display: flex;
@@ -107,6 +110,20 @@ const Hobbie = styled.div`
 		height: 69px;
 		right: 10px;
 		background: #EBEBEB;
+		border: 1px solid #E7E7E7;
+		border-radius: 5px;
+	}
+
+	.checkbox_selected {
+		box-sizing: border-box;
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 69px;
+		height: 69px;
+		right: 10px;
+		background: #8FC549;
 		border: 1px solid #E7E7E7;
 		border-radius: 5px;
 	}

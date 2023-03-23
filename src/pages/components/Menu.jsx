@@ -1,25 +1,31 @@
 import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
-
+import { Link } from "react-router-dom";
 
 const Menu = () => {
 	return(
 		<Main>
-			<h2>Hábitos</h2>
-			<CircularProgressbar className="circle"
-        value={66}
-        text={"Hoje"}
-        background
-        backgroundPadding={6}
-        styles={buildStyles({
-          backgroundColor: "#3e98c7",
-          textColor: "#fff",
-          pathColor: "#fff",
-          trailColor: "transparent",
-        })}
-      />
-			<h2>Histórico</h2>
+			<Link to="/habitos">
+				<h2>Hábitos</h2>
+			</Link>
+			<Link to="/hoje">
+				<CircularProgressbar className="circle"
+								value={66}
+								text={"Hoje"}
+								background
+								backgroundPadding={6}
+								styles={buildStyles({
+									backgroundColor: "#3e98c7",
+									textColor: "#fff",
+									pathColor: "#fff",
+									trailColor: "transparent",
+								})}
+							/>
+			</Link>
+			<Link to="/historico">
+				<h2>Histórico</h2>
+			</Link>
 		</Main>
 	)
 }
@@ -35,6 +41,10 @@ const Main = styled.div`
 	width: 375px;
 	height: 70px;
 	background: #FFFFFF;
+
+	a {
+		text-decoration: none;
+	}
 
 	h2 {	
 	font-family: 'Lexend Deca';

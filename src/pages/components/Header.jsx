@@ -1,11 +1,16 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import TextLogo from "../../assets/images/TrackIt_Text.svg"
+import UserImgContext from "../../contexts/UserImgContext";
 
 const Header = () => {
+
+	const {image} = useContext(UserImgContext);
+
 	return (
 		<Main>
 			<img className="logo" src={TextLogo} alt="text-logo"/>
-			<img className="avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToi4ToqDB3Y-9quXMWnnNYqGvF58HTu-U50A&usqp=CAU" alt=""></img>
+			<img className="avatar" src={image} alt=""></img>
 		</Main>
 	)
 }
