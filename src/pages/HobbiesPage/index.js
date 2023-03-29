@@ -7,6 +7,9 @@ const HobbiesPage = () => {
 
 	const days = ["D","S","T","Q","Q","S","S"];
 
+	const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+
+	
 
 	return (
 		<Main>

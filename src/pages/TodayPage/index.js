@@ -3,10 +3,11 @@ import Header from "../components/Header";
 import Menu from "../components/Menu";
 import dayjs from "dayjs";
 import 'dayjs/locale/pt-br'
-import CheckMark from "../../assets/images/Checkmark.svg"
-import { useState, useContext} from "react";
+import { useState, useContext, useEffect} from "react";
 import TokenContext from "../../contexts/TokenContext";
-
+import ProgressContext from "../../contexts/ProgressContext";
+import axios from "axios";
+import Today_Hobbie from "./Today_Hobbie";
 
 const TodayPage = () => {
 
@@ -15,22 +16,41 @@ const TodayPage = () => {
 	const data_weekday = dayjs().format("dddd")
 	const weekday = data_weekday.charAt(0).toUpperCase() + data_weekday.slice(1);
 	const day_month = dayjs().format("D/M")
+	const {token} = useContext(TokenContext);
+	const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
+	const {progress} = useContext(ProgressContext);
+	const [items, setItems] = useState([]);
+
+
+	useEffect(() => {
+		const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+
+		const promise = axios.get(URL, config);
+
+		promise.then(response => {
+			const {data} = response;
+			console.log(data);
+			setItems(data);
+		})
+
+	}, []);
+
+
 
 	return (
 		<Main>
 			<Header></Header>
 			<h1 className="tday">{`${weekday}, ${day_month}`}</h1>
-			<p className="hobbie-progress incomplete">Nenhum hábito concluído ainda</p>
-			<Hobbie>
-				<h1 className="title">Ler One Piece</h1>
-				<div className="description">
-					<p className="sequence">Sequência atual: 2 dias</p>
-					<p className="sequence">Seu recorde: 4 dias</p>
-				</div>
-				<div className="checkbox_unselected">
-					<img src={CheckMark} alt="checkmark"/>
-				</div>
-			</Hobbie>
+			{progress === 0 ?  <p className="hobbie-progress_incomplete">Nenhum hábito concluído ainda</p> : <p className="hobbie-progress">{`${progress}% dos hábitos concluídos`}</p>}
+			{items.map((item) => {
+				const {id,name,currentSequence,highestSequence,done} = item;
+				return <Today_Hobbie id={id} name={name} currentSequence={currentSequence} highestSequence={highestSequence} done={done} lenght={items.length}></Today_Hobbie>
+			}
+			)}
 			<Menu></Menu>
 		</Main>
 	)
@@ -58,7 +78,7 @@ const Main = styled.div`
 	color: #126BA5;
 	}
 
-	.hobbie-progress {
+	.hobbie-progress_incomplete {
 		font-family: 'Lexend Deca';
 		font-style: normal;
 		font-weight: 400;
@@ -66,69 +86,18 @@ const Main = styled.div`
 		line-height: 22px;
 		color: #BABABA;
 	}
-`
 
-const Hobbie = styled.div`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: baseline;
-	margin-top: 28px;
-	width: 340px;
-	height: 94px;
-	background: #FFFFFF;
-	border-radius: 5px;
-
-	.title {
-	margin-left: 15px;
-	margin-bottom: 7px;
-	font-family: 'Lexend Deca';
-	font-style: normal;
-	font-weight: 400;
-	font-size: 20px;
-	line-height: 25px;	
-	color: #666666;
-	}
-
-	.sequence {
-	font-family: 'Lexend Deca';
-	font-style: normal;
-	font-weight: 400;
-	font-size: 13px;
-	line-height: 16px;
-	color: #666666;
-	}
-
-	.checkbox_unselected {
-		box-sizing: border-box;
-		position: absolute;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 69px;
-		height: 69px;
-		right: 10px;
-		background: #EBEBEB;
-		border: 1px solid #E7E7E7;
-		border-radius: 5px;
-	}
-
-	.checkbox_selected {
-		box-sizing: border-box;
-		position: absolute;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 69px;
-		height: 69px;
-		right: 10px;
-		background: #8FC549;
-		border: 1px solid #E7E7E7;
-		border-radius: 5px;
+	.hobbie-progress {
+		font-family: 'Lexend Deca';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 22px;
+		color: #8FC549;
 	}
 
 `
+
 
 
 export default TodayPage;
